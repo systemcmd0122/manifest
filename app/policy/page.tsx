@@ -9,11 +9,19 @@ export default function PolicyPage() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border py-4 sm:py-6 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
-          <Link href="/" className="text-primary hover:opacity-70 transition-opacity flex-shrink-0">
+          <Link href="/" className="text-primary hover:opacity-70 transition-opacity shrink-0">
             <ArrowLeft className="w-5 h-5 sm:w-5 sm:h-5" />
           </Link>
           <h1 className="text-xl sm:text-2xl font-bold text-primary flex-1">公約の詳細</h1>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <Link
+              href="/check"
+              className="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
+            >
+              校則チェック
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -22,7 +30,7 @@ export default function PolicyPage() {
           {/* Introduction Section */}
           <section className="mb-12 sm:mb-16 bg-muted/50 rounded-lg p-6 sm:p-8">
             <p className="text-base sm:text-lg leading-relaxed text-foreground/80 mb-3 sm:mb-4">
-              皆さん、こんにちは。2年D組の徳田太祐です。 今日は、僕が考える「もっと納得できる学校」について話します。
+              皆さん、こんにちは。2年D組の徳田太祐です。 今回は、僕が考える「もっと納得できる学校」について話します。
             </p>
             <p className="text-base sm:text-lg leading-relaxed text-foreground/80">
               校則についてです。文部科学省の「生徒指導提要」にはこう書かれています。
@@ -36,7 +44,7 @@ export default function PolicyPage() {
           {/* Promise 1 */}
           <section className="mb-12 sm:mb-16">
             <div className="flex items-start gap-2 sm:gap-3 mb-4 sm:mb-4">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shrink-0">
                 <span className="font-bold text-primary-foreground text-sm sm:text-base">1</span>
               </div>
               <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-primary leading-tight">
@@ -46,7 +54,7 @@ export default function PolicyPage() {
 
             <div className="space-y-4 sm:space-y-6 text-foreground leading-relaxed text-sm sm:text-base">
               <p>
-                つまり、校則は「ただ守うもの」ではなく、理由を理解して自分から守えるものが本来の姿です。
+                つまり、校則は「ただ守るもの」ではなく、理由を理解して自分から守るものが本来の姿です。
                 さらに、文部科学省はこうも言っています。
               </p>
 
@@ -59,7 +67,7 @@ export default function PolicyPage() {
               <p>
                 でも、今の僕たちの学校を見てみるとどうでしょう。
                 「理由はよく分からないけど、とりあえず守っている」という人が多いのではないでしょうか。
-                本来、校則は納得して守えるものであるべきです。
+                本来、校則は納得して守るものであるべきです。
               </p>
 
               <div className="bg-accent/10 p-5 sm:p-6 rounded-lg">
@@ -79,7 +87,7 @@ export default function PolicyPage() {
           {/* Promise 2 */}
           <section className="mb-12 sm:mb-16">
             <div className="flex items-start gap-2 sm:gap-3 mb-4">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-accent rounded-full flex items-center justify-center shrink-0">
                 <span className="font-bold text-accent-foreground text-sm sm:text-base">2</span>
               </div>
               <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-accent leading-tight">
