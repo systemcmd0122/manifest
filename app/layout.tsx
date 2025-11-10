@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Noto_Sans_JP } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { VisitorCounter } from "@/components/visitor-counter"
 import "./globals.css"
 
 const _notoSansJP = Noto_Sans_JP({
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body
         className={`${_notoSansJP.className} font-sans antialiased bg-background text-foreground transition-colors`}
       >
+        <VisitorCounter />
         {children}
         <Analytics />
       </body>
