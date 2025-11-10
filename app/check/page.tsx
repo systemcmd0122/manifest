@@ -1,17 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { database } from "@/lib/firebase";
 import { ref, runTransaction } from "firebase/database";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { RuleUnderstandingStats } from "@/components/rule-understanding-stats";
 
 export default function CheckPage() {
   const [hasVoted, setHasVoted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const voted = localStorage.getItem("ruleUnderstandingVoted");
+    if (voted) {
+      setHasVoted(true);
+    }
+  }, []);
+
   const handleVote = async (type: 'understood' | 'notUnderstood') => {
     if (loading || hasVoted) return;
+
+    const voted = localStorage.getItem("ruleUnderstandingVoted");
+    if (voted) {
+      setHasVoted(true);
+      return;
+    }
     
     setLoading(true);
     const statsRef = ref(database, "ruleUnderstanding");
@@ -31,6 +45,7 @@ export default function CheckPage() {
         };
       });
 
+      localStorage.setItem("ruleUnderstandingVoted", "true");
       setHasVoted(true);
     } catch (error) {
       console.error("投票の処理中にエラーが発生しました:", error);
@@ -51,6 +66,7 @@ export default function CheckPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
+            <RuleUnderstandingStats />
             {!hasVoted ? (
               <div className="flex flex-col gap-4">
                 <Button 

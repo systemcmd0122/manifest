@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { RuleUnderstandingStats } from "@/components/rule-understanding-stats"
 
 export default function PolicyPage() {
   return (
@@ -65,8 +66,11 @@ export default function PolicyPage() {
               <p>
                 でも、今の僕たちの学校を見てみるとどうでしょう。
                 「理由はよく分からないけど、とりあえず守っている」という人が多いのではないでしょうか。
-                本来、校則は納得して守るものであるべきです。
               </p>
+
+              <RuleUnderstandingStats />
+
+              <p>本来、校則は納得して守るものであるべきです。</p>
 
               <div className="bg-accent/10 p-5 sm:p-6 rounded-lg">
                 <h3 className="font-semibold text-foreground mb-3 text-sm sm:text-base">具体的な取り組み</h3>
