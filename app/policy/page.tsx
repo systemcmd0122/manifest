@@ -13,15 +13,13 @@ export default function PolicyPage() {
             <ArrowLeft className="w-5 h-5 sm:w-5 sm:h-5" />
           </Link>
           <h1 className="text-xl sm:text-2xl font-bold text-primary flex-1">公約の詳細</h1>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/check"
-              className="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
-            >
-              校則チェック
-            </Link>
-            <ThemeToggle />
-          </div>
+          <Link
+            href="/check"
+            className="px-4 py-2 text-sm font-medium text-primary border border-primary rounded-full hover:bg-primary/10 transition-colors"
+          >
+            校則の理解度チェック
+          </Link>
+          <ThemeToggle />
         </div>
       </header>
 

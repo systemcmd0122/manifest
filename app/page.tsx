@@ -24,12 +24,6 @@ export default function Home() {
           <div className="flex items-center gap-3 sm:gap-4">
             <ThemeToggle />
             <Link
-              href="/check"
-              className="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
-            >
-              校則チェック
-            </Link>
-            <Link
               href="/policy"
               className="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg border border-border hover:border-primary text-foreground hover:text-primary smooth-transition whitespace-nowrap"
             >
