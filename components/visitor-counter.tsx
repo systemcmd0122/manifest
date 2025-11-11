@@ -7,8 +7,8 @@ import { ref, runTransaction } from "firebase/database";
 export function VisitorCounter() {
   useEffect(() => {
     const incrementVisitorCount = async () => {
-      // セッションストレージでカウント済みかチェック
-      const hasVisited = sessionStorage.getItem("hasVisited");
+      // ローカルストレージでカウント済みかチェック
+      const hasVisited = localStorage.getItem("hasVisited");
       
       if (!hasVisited) {
         try {
@@ -18,8 +18,8 @@ export function VisitorCounter() {
             return (currentCount || 0) + 1;
           });
           
-          // セッションストレージにマーク
-          sessionStorage.setItem("hasVisited", "true");
+          // ローカルストレージにマーク
+          localStorage.setItem("hasVisited", "true");
         } catch (error) {
           console.error("訪問者カウントの更新に失敗しました:", error);
         }

@@ -1,15 +1,55 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, BookOpen, MessageCircle } from "lucide-react"
-import { useState } from "react"
+import { ArrowRight, BookOpen, MessageCircle, ClipboardCheck } from "lucide-react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Home() {
+  const router = useRouter()
   const [, setHoveredPromise] = useState<number | null>(null)
+  const [showCheckBanner, setShowCheckBanner] = useState(false)
+
+  useEffect(() => {
+    // 理解度チェックが完了しているか確認
+    const hasVoted = localStorage.getItem("ruleUnderstandingVoted")
+    
+    if (!hasVoted) {
+      // 未回答の場合、バナーを表示
+      setShowCheckBanner(true)
+      
+      // 3秒後に自動的にチェックページへリダイレクト
+      const timer = setTimeout(() => {
+        router.push("/check")
+      }, 3000)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [router])
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* 理解度チェック促進バナー */}
+      {showCheckBanner && (
+        <div className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-3 px-4 sm:px-6 relative animate-in slide-in-from-top duration-500">
+          <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <ClipboardCheck className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
+              <p className="text-sm sm:text-base font-medium truncate">
+                校則についてのアンケートにご協力ください（3秒後に自動移動します）
+              </p>
+            </div>
+            <Link
+              href="/check"
+              className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors"
+            >
+              今すぐ回答
+            </Link>
+          </div>
+        </div>
+      )}
+      
       <header className="border-b border-border backdrop-blur-sm sticky top-0 z-50 bg-background/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -21,8 +61,14 @@ export default function Home() {
               <h1 className="text-base sm:text-lg font-semibold text-primary truncate">徳田 太祐</h1>
             </div>
           </div>
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
+            <Link
+              href="/check"
+              className="text-xs sm:text-sm px-2 sm:px-3 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white smooth-transition whitespace-nowrap font-medium"
+            >
+              校則理解度チェック
+            </Link>
             <Link
               href="/policy"
               className="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg border border-border hover:border-primary text-foreground hover:text-primary smooth-transition whitespace-nowrap"
@@ -56,13 +102,23 @@ export default function Home() {
             2年D組の徳田太祐です。皆さんの一票が、新しい学校の一歩になります。
           </p>
 
-          <Link
-            href="/policy"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary/90 smooth-transition group text-sm sm:text-base"
-          >
-            公約を見る
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 smooth-transition" />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link
+              href="/check"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-green-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:from-green-700 hover:to-green-600 smooth-transition group text-sm sm:text-base shadow-lg shadow-green-500/30"
+            >
+              <ClipboardCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+              校則理解度チェック（10秒）
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 smooth-transition" />
+            </Link>
+            <Link
+              href="/policy"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-primary/90 smooth-transition group text-sm sm:text-base"
+            >
+              公約を見る
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 smooth-transition" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -192,6 +248,12 @@ export default function Home() {
             <div>
               <p className="text-xs sm:text-sm font-semibold text-foreground mb-2 sm:mb-3">リンク</p>
               <div className="space-y-1.5 sm:space-y-2">
+                <Link
+                  href="/check"
+                  className="text-xs sm:text-sm text-foreground/60 hover:text-primary smooth-transition block"
+                >
+                  理解度チェック
+                </Link>
                 <Link
                   href="/policy"
                   className="text-xs sm:text-sm text-foreground/60 hover:text-primary smooth-transition block"
